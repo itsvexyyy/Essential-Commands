@@ -37,6 +37,7 @@
   "cmd.tpask.receive": "${0} solicitou teletransporte para você.\nDigite '/tpaccept <nome>' para aceitar or '/tpdeny <nome>' para recusar a solicitação.",
   "cmd.tpask.send": "O pedido de teletransporte foi enviado para ${0}",
   "cmd.tpask.error.exists": "Pedido não enviado. Você já tem um pedido de teletransporte pendente para ${0}",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "{0} pediu que você se teletransporte para ele.\nDigite '/tpaccept <nome>' para aceitar or '/tpdeny <nome>' para recusar a solicitação.",
   "cmd.tpcancel.feedback": "Pedido de teletransporte para ${0} cancelado.",
   "cmd.tpcancel.error.no_exists": "Não há pedido ativo de teletransporte para cancelar.",
@@ -66,6 +67,7 @@
   "player.afk.exit": "${0} não está mais AFK.",
 
   "teleport.error.interdimensional_teleport_disabled": "O teleporte falhou. Razão: Teletransporte interdimensional desativado.",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "Teletransportando para ${0} em ${1} segundos...",
   "teleport.done": "Teletransportado para ${0}.",
   "teleport.interrupted.damage": "Teletransporte interrompido. Razão: Dano tomado",

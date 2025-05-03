@@ -39,6 +39,7 @@
   "cmd.tpask.receive": "${0} 请求传送到你这里。\n输入 \"/tpaccept <玩家名称>\" 来接受请求，或输入 \"/tpdeny <玩家名称>\" 来拒绝请求。",
   "cmd.tpask.send": "已将传送请求发送至 ${0} 。",
   "cmd.tpask.error.exists": "未能发送传送请求。已有一个发送至 \"${0}\" 的请求。",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "${0} 请求你传送到对方。\n输入 \"/tpaccept <玩家名称>\" 来接受请求，或输入 \"/tpdeny <玩家名称>\" 来拒绝请求。",
   "cmd.tpcancel.feedback": "向 ${0} 发起的传送请求已取消。",
   "cmd.tpcancel.error.no_exists": "没有可以取消的传送请求。",
@@ -66,6 +67,7 @@
   "player.afk.exit": "${0} 回来了。",
 
   "teleport.error.interdimensional_teleport_disabled": "传送失败。原因：跨维度传送已被禁止。",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "将在 ${1} 秒内传送至 ${0} ...",
   "teleport.done": "已传送至 ${0} 。",
   "teleport.interrupted.damage": "传送中断。原因：受到伤害。",

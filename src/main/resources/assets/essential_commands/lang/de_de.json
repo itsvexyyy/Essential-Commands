@@ -37,6 +37,7 @@
   "cmd.tpask.receive": "${0} möchte sich zu dir teleportieren.\nTippe '/tpaccept <Name>' um die Anfrage anzunehmen oder '/tpdeny <Name>' um sie abzulehnen.",
   "cmd.tpask.send": "Teleportanfrage an ${0} gesendet.",
   "cmd.tpask.error.exists": "Teleportanfrage nicht gesendet. Du hast bereits eine ausstehende Teleportanfrage für den Spieler ${0}.",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "Der Spieler ${0} möchte, dass du dich zu ihm teleportierst.\nTippe '/tpaccept <Name>' um die Anfrage anzunehmen oder '/tpdeny <Name>' um sie abzulehnen.",
   "cmd.tpcancel.feedback": "Teleportanfrage an ${0} abgebrochen.",
   "cmd.tpcancel.error.no_exists": "Keine aktive Teleportanfrage vorhanden.",
@@ -68,6 +69,7 @@
   "player.afk.exit": "${0} ist nicht mehr AFK.",
 
   "teleport.error.interdimensional_teleport_disabled": "Teleport fehlgeschlagen. Grund: Teleportation zwischen Dimensionen ist deaktiviert.",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "Teleportation zu ${0} in ${1} Sekunden...",
   "teleport.done": "Zu ${0} teleportiert.",
   "teleport.interrupted.damage": "Teleportation abgebrochen. Grund: Spieler hat Schaden erhalten",

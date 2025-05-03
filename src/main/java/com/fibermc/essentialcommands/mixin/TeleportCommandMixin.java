@@ -41,6 +41,20 @@ public class TeleportCommandMixin {
             if (!targetPlayer.isSpectator()) {
                 targetPlayerData.setPreviousLocation(new MinecraftLocation(targetPlayer));
             }
+        } else {
+            for (Entity passenger: target.getPassengerList()) {
+                if (passenger instanceof ServerPlayerEntity) {
+                    var targetPlayerData = ((ServerPlayerEntityAccess)passenger).ec$getPlayerData();
+                    targetPlayerData.setPreviousLocation(
+                        new MinecraftLocation(
+                            target.getWorld().getRegistryKey(),
+                            target.getPos().getX(),
+                            target.getPos().getY(),
+                            target.getPos().getZ()
+                        )
+                    );
+                }
+            }
         }
     }
 }

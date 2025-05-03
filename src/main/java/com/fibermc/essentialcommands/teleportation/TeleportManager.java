@@ -10,7 +10,10 @@ import com.fibermc.essentialcommands.playerdata.PlayerData;
 import com.fibermc.essentialcommands.playerdata.PlayerDataManager;
 import com.fibermc.essentialcommands.text.TextFormatType;
 import com.fibermc.essentialcommands.types.MinecraftLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -21,6 +24,7 @@ import dev.jpcode.eccore.util.TimeUtil;
 import static com.fibermc.essentialcommands.EssentialCommands.CONFIG;
 
 public final class TeleportManager {
+    private static final Logger LOGGER = LogManager.getLogger("TeleportManager");
     private final List<TeleportRequest> activeTeleportRequests;
     private final List<PlayerData> playersOnTeleportCooldown;
     private final Map<UUID, QueuedTeleport> queuedTeleportMap;
@@ -98,7 +102,16 @@ public final class TeleportManager {
 
             if (queuedTeleport.getTicksRemaining() < 0) {
                 tpQueueIter.remove();
-                PlayerTeleporter.teleport(queuedTeleport);
+
+                Entity vehicle = queuedTeleport.getPlayerData().getPlayer().getVehicle();
+
+                if (vehicle != null) {
+                    PlayerTeleporter.teleportWithVehicle(queuedTeleport.getPlayerData(), vehicle, queuedTeleport.getDest(), queuedTeleport.getDestName());
+                    LOGGER.error("Player in vehicle, teleporting with vehicle");
+                } else {
+                    LOGGER.error("Player not in vehicle, teleporting normally");
+                    PlayerTeleporter.teleport(queuedTeleport);
+                }
             }
         }
     }

@@ -23,7 +23,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-
 import dev.jpcode.eccore.util.TextUtil;
 
 import static com.fibermc.essentialcommands.EssentialCommands.CONFIG;
@@ -42,7 +41,16 @@ public final class PlayerTeleporter {
 //            //send TP request to tpManager
 //        }
         if (playerHasTpRulesBypass(player, ECPerms.Registry.bypass_teleport_delay) || CONFIG.TELEPORT_DELAY_TICKS <= 0) {
-            teleport(queuedTeleport.getPlayerData(), queuedTeleport.getDest(), queuedTeleport.getDestName());
+            PlayerData pData = queuedTeleport.getPlayerData();
+            MinecraftLocation dest = queuedTeleport.getDest();
+            MutableText destName = queuedTeleport.getDestName();
+            Entity vehicle = player.getVehicle();
+
+            if (vehicle != null) {
+                teleportWithVehicle(pData, vehicle, dest, destName);
+            } else {
+                teleport(pData, dest, destName);
+            }
         } else {
             TeleportManager.getInstance().queueTeleport(queuedTeleport);
         }
@@ -54,7 +62,17 @@ public final class PlayerTeleporter {
 
     public static void teleport(QueuedTeleport queuedTeleport) {
         queuedTeleport.complete();
-        teleport(queuedTeleport.getPlayerData(), queuedTeleport.getDest(), queuedTeleport.getDestName());
+
+        PlayerData pData = queuedTeleport.getPlayerData();
+        MinecraftLocation dest = queuedTeleport.getDest();
+        MutableText destName = queuedTeleport.getDestName();
+        Entity vehicle = pData.getPlayer().getVehicle();
+
+        if (queuedTeleport.getPlayerData().getPlayer().getVehicle() != null) {
+            teleportWithVehicle(pData, vehicle, dest, destName);
+        } else {
+            teleport(pData, dest, destName);
+        }
     }
 
     public static void teleport(PlayerData pData, MinecraftLocation dest, MutableText destName) { //forceTeleport
@@ -71,6 +89,21 @@ public final class PlayerTeleporter {
         }
 
         execTeleport(player, dest, destName);
+    }
+
+    public static void teleportWithVehicle(PlayerData pData, Entity vehicle, MinecraftLocation dest, MutableText destName) {
+        ServerPlayerEntity player = pData.getPlayer();
+
+        // If teleporting with vehicles is disabled and player doesn't have TP rules override
+        if (!CONFIG.ALLOW_TELEPORT_WITH_VEHICLES
+            && !playerHasTpRulesBypass(player, ECPerms.Registry.bypass_allow_teleport_with_vehicles)) {
+            if (player.getVehicle() != null) {
+                pData.sendError("teleport.error.vehicle_teleport_disabled");
+                return;
+            }
+        }
+
+        execTeleportWithVehicle(player, dest, destName);
     }
 
     /**
@@ -92,6 +125,34 @@ public final class PlayerTeleporter {
         Vec3d targetVec = new Vec3d(dest.pos().x, dest.pos().y, dest.pos().z);
 
         playerEntity.teleport(targetWorld, targetVec.x, targetVec.y, targetVec.z, Set.of(), dest.headYaw(), dest.pitch(), false);
+
+        if (CONFIG.TELEPORT_FOLLOWERS) {
+            List<TameableEntity> pets = detectTamedPets(playerEntity, playerPos);
+            teleportTamedEntities(pets, targetWorld, targetVec, playerEntity);
+        }
+
+        sendTeleportMessage(playerEntity, destName, dest);
+    }
+
+    /**
+     * Executes the teleportation of a player, their tamed pets, and the vehicle they are currently riding to a specified destination.
+     *
+     * @param playerEntity the player entity to be teleported
+     * @param dest the destination location for the teleportation
+     * @param destName the name of the destination to be displayed in messages
+     */
+    private static void execTeleportWithVehicle(ServerPlayerEntity playerEntity, MinecraftLocation dest, MutableText destName) {
+        var playerServer = playerEntity.getServer();
+        var targetWorld = playerServer.getWorld(dest.dim());
+
+        if (targetWorld == null) {
+            throw new NullPointerException(String.format("Could not find teleport target world, '%s'", dest.dim()));
+        }
+
+        BlockPos playerPos = playerEntity.getBlockPos();
+        Vec3d targetVec = new Vec3d(dest.pos().x, dest.pos().y, dest.pos().z);
+
+        playerEntity.getVehicle().teleport(targetWorld, targetVec.x, targetVec.y, targetVec.z, Set.of(), dest.headYaw(), dest.pitch(), false);
 
         if (CONFIG.TELEPORT_FOLLOWERS) {
             List<TameableEntity> pets = detectTamedPets(playerEntity, playerPos);
@@ -208,7 +269,7 @@ public final class PlayerTeleporter {
     }
 
 
-    static boolean playerHasTpRulesBypass(ServerPlayerEntity player, String permission) {
+    public static boolean playerHasTpRulesBypass(ServerPlayerEntity player, String permission) {
         return (
             (player.hasPermissionLevel(4) && CONFIG.OPS_BYPASS_TELEPORT_RULES)
                 || ECPerms.check(player.getCommandSource(), permission, 5)

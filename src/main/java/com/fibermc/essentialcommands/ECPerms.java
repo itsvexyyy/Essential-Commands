@@ -22,6 +22,7 @@ public final class ECPerms {
     @SuppressWarnings({"checkstyle:constantname", "checkstyle:staticvariablename"})
     public static final class Registry {
         public static final String tpa = "essentialcommands.tpa";
+        public static final String tpa_vehicles = "essentialcommands.tpa_vehicles";
         public static final String tpahere = "essentialcommands.tpahere";
         public static final String tpaccept = "essentialcommands.tpaccept";
         public static final String tpdeny = "essentialcommands.tpdeny";
@@ -66,6 +67,7 @@ public final class ECPerms {
         public static final String config_reload = "essentialcommands.config.reload";
         public static final String bypass_teleport_delay = "essentialcommands.bypass.teleport_delay";
         public static final String bypass_allow_teleport_between_dimensions = "essentialcommands.bypass.allow_teleport_between_dimensions";
+        public static final String bypass_allow_teleport_with_vehicles = "essentialcommands.bypass.allow_teleport_with_vehicles";
         public static final String bypass_teleport_interrupt_on_damaged = "essentialcommands.bypass.teleport_interrupt_on_damaged";
         public static final String bypass_teleport_interrupt_on_move = "essentialcommands.bypass.teleport_interrupt_on_move";
         public static final String bypass_randomteleport_cooldown = "essentialcommands.bypass.randomteleport_cooldown";

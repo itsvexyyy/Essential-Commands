@@ -39,6 +39,7 @@
   "cmd.tpask.receive": "${0} 님이 당신에게 순간이동을 요청하였습니다.\n'/tpaccept <유저명>'을 입력해 승인하거나, '/tpdeny <유저명>'을 입력해 거절합니다.",
   "cmd.tpask.send": "${0}님에게 순간이동 요청을 전송했습니다.",
   "cmd.tpask.error.exists": "${0}님에 대한 대기중인 순간이동 요청이 있어 순간이동 요청이 전송되지 않았습니다.",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "${0}님이 당신을 자신의 위치로 순간이동 요청을 전송하였습니다.\n/tpaccept <유저명>'을 입력해 승인하거나, '/tpdeny <유저명>'을 입력해 거절합니다.",
   "cmd.tpcancel.feedback": "${0}님에 대한 순간이동 요청이 거절되었습니다.",
   "cmd.tpcancel.error.no_exists": "활성화된 순간이동 요청이 없습니다.",
@@ -70,6 +71,7 @@
   "player.afk.exit": "${0}님은 더 이상 잠수 상태가 아닙니다.",
 
   "teleport.error.interdimensional_teleport_disabled": "순간이동에 실패하였습니다. 사유: 차원간 순간이동 비활성.",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "${1}초 뒤 ${0}으로 순간이동 됩니다...",
   "teleport.done": "${0}으로 순간이동 되었습니다.",
   "teleport.interrupted.damage": "순간이동에 실패하였습니다. 사유: 데미지 받음",

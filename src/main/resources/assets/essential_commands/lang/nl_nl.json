@@ -42,6 +42,7 @@
   "cmd.tpask.receive": "${0} wilt naar jou toe teleporteren.\nTyp '/tpaccept <naam>' om dit verzoek te accepteren of '/tpdeny <naam>' om dit te weigeren.",
   "cmd.tpask.send": "Teleportatie verzoek is verzonden naar ${0}",
   "cmd.tpask.error.exists": "Verzoek niet verzonden. Je hebt al een teleportatie verzoek open staan naar ${0}",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "${0} heeft gevraagd om naar jou toe te teleporteren.\nTyp '/tpaccept <naam>' om dit verzoek te accepteren of '/tpdeny <naam>' om dit te weigeren.",
   "cmd.tpcancel.feedback": "Teleportatie verzoek naar ${0} geannuleerd.",
   "cmd.tpcancel.error.no_exists": "Geen openstaand teleportatie verzoek om te annuleren.",
@@ -87,6 +88,7 @@
   "player.afk.exit": "${0} is niet meer AFK.",
 
   "teleport.error.interdimensional_teleport_disabled": "Teleporteren mislukt. Reden: Interdimensionale teleportatie uitgeschakeld.",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "Teleporteren naar ${0} in ${1} seconden...",
   "teleport.done": "Teleporteren naar ${0}.",
   "teleport.interrupted.damage": "Teleportatie onderbroken. Reden: speler lijdt pijn.",

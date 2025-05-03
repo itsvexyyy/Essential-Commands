@@ -4,6 +4,7 @@ import com.fibermc.essentialcommands.EssentialCommands;
 import com.fibermc.essentialcommands.access.ServerPlayerEntityAccess;
 import com.fibermc.essentialcommands.playerdata.PlayerData;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class TeleportRequest {
@@ -44,6 +45,7 @@ public class TeleportRequest {
     public void queue() {
         ServerPlayerEntity teleportee;
         ServerPlayerEntity tpDestination;
+        Entity vehicle;
 
         if (type == Type.TPA_HERE) {
             tpDestination = senderPlayer.getPlayer();
@@ -56,7 +58,13 @@ public class TeleportRequest {
             return;
         }
 
-        PlayerTeleporter.requestTeleport(new QueuedPlayerTeleport(teleportee, tpDestination));
+        vehicle = teleportee.getVehicle();
+
+        if (vehicle != null) {
+            PlayerTeleporter.requestTeleport(new QueuedPlayerTeleport(teleportee, vehicle, tpDestination));
+        } else {
+            PlayerTeleporter.requestTeleport(new QueuedPlayerTeleport(teleportee, tpDestination));
+        }
     }
 
     public void incrementAgeTicks() {

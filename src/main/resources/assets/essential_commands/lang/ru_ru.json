@@ -37,6 +37,7 @@
   "cmd.tpask.receive": "${0} запросил телепорт к Вам.\nВведите:\n'/tpaccept <name>', чтобы принять\n'/tpdeny <name>' чтобы отклонить.",
   "cmd.tpask.send": "Запрос на телепортацию отправлен ${0}",
   "cmd.tpask.error.exists": "Запрос не отправлен. У Вас есть ожидающий запрос на телепортацию ${0}",
+  "cmd.tpask.error.riding": "You must dismount your ${0} before sending a teleport request.",
   "cmd.tpaskhere.receive": "${0} запросил Вашу телепортацию к нему.\nВведите:\n'/tpaccept <name>', чтобы принять\n'/tpdeny <name>' чтобы отклонить.",
   "cmd.tpcancel.feedback": "Запрос на телепортацию ${0} отменен.",
   "cmd.tpcancel.error.no_exists": "Нет активного запроса на телепортацию для отмены.",
@@ -66,6 +67,7 @@
   "player.afk.exit": "${0} больше не AFK.",
 
   "teleport.error.interdimensional_teleport_disabled": "Телепортация отменена. Телепортация между измерениями выключена администрацией.",
+  "teleport.error.vehicle_teleport_disabled": "Teleport failed. Reason: Vehicle teleportation disabled.",
   "teleport.queued": "Телепортирование к ${0} через ${1} секунд...",
   "teleport.done": "Телепортирование к ${0}.",
   "teleport.interrupted.damage": "Телепортация прервана. Причина: Получение урона",

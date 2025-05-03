@@ -4,6 +4,7 @@ import com.fibermc.essentialcommands.access.ServerPlayerEntityAccess;
 import com.fibermc.essentialcommands.playerdata.PlayerData;
 import com.fibermc.essentialcommands.types.MinecraftLocation;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
@@ -22,6 +23,11 @@ public class QueuedPlayerTeleport extends QueuedTeleport {
     }
 
     public QueuedPlayerTeleport(ServerPlayerEntity teleportingPlayer, ServerPlayerEntity destinationPlayer) {
+        super(((ServerPlayerEntityAccess) teleportingPlayer).ec$getPlayerData(), destinationPlayer.getDisplayName());
+        this.targetPlayer = destinationPlayer;
+    }
+
+    public QueuedPlayerTeleport(ServerPlayerEntity teleportingPlayer, Entity teleportingVehicle, ServerPlayerEntity destinationPlayer) {
         super(((ServerPlayerEntityAccess) teleportingPlayer).ec$getPlayerData(), destinationPlayer.getDisplayName());
         this.targetPlayer = destinationPlayer;
     }
